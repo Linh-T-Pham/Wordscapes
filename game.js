@@ -11,28 +11,20 @@ const letterList = [["DRIP", "RID", "DIP", "RIP"],
               ["BAT", "BET", "EAT", "BETA", 'TEA', "TAB", 
               "ATE", "BEAT"]];
 
-// Loop over each letter in letter choice 
-// const createDivsForLetterChoice = (letterchoice) => {
-//     for (const letter of letterChoice) {
-//         $('#letter-container').append(`<div class="letter-box ${letter}"></div`);
-//     }
-// };
-
 
 function greeting() {
-  let playerName = input('What is your name?>');
-  playerName = player_name.title();
+  let playerName = "What is your name?"
   console.log("Welcome to Wordscapes!");
   console.log("Please create different words form 4 given letters!");
 }
 
-function wordScapesGame(letter, accept_list) {
+function wordScapesGame(letters, accept_list) {
 
   while (true){
-    const answer = input("Your answer:>")
-    const answer = answer.upper()
-
-    if ( answer in accept_list )  {
+    let answer = "Your answer:"
+    
+    // Check if answer in the accept_list
+    if (accept_list.indexOf(answer) !== -1)  {
       console.log("Correct!");
     } else {
       console.log("Wrong answer!");
@@ -46,16 +38,16 @@ function wordScapesGame(letter, accept_list) {
 
 function genterateRandomLetterList() {
   const rand = letterChoice[Math.floor(Math.random() * letterChoice.length)];
-  console.log("User letter:" + str(rand) + "to create different words");
+  console.log("User letter:" + rand + "to create different words");
 
   if (rand === letterChoice[0]) {
-    const possible_words_list = letterChoice[0];
+    possible_words_list = letterChoice[0];
   } else if (rand === letterChoice[1]) {
-    const possible_words_list = letterChoice[1];
+    possible_words_list = letterChoice[1];
   } else if (rand === letterChoice[2]) {
-    const possible_words_list = letterChoice[2];
+    possible_words_list = letterChoice[2];
   } else if (rand ===  letterChoice[3]) {
-    const possible_words_list = letterChoice[3];
+    possible_words_list = letterChoice[3];
   }
 
   return [rand, possible_words_list];
@@ -63,9 +55,7 @@ function genterateRandomLetterList() {
 }
 
 function playAgain() {
-  const playAgain = input("Do you want to play again? Type Yes or No:>");
-  const playAgain = play_again.lower();
-}
+  let playAgain = "Do you want to play again? Type Yes or No"
 
   if (playAgain === "yes") {
     return true;
@@ -73,6 +63,7 @@ function playAgain() {
   else {
    console.log("Bye");
   }
+}
 
 function playGame() {
   greeting()
@@ -81,8 +72,8 @@ function playGame() {
     const play_wordscapes_game = genterateRandomLetterList();
     const letters = play_wordscapes_game[0];
     const accept_list = play_wordscapes_game[1];
-    wordscapes_game(letters, accept_list);
-    playing = playAgain()
+    wordScapesGame(letters, accept_list);
+    playing == playAgain()
   }
 }
 
