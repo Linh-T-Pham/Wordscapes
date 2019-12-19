@@ -32,15 +32,14 @@ def wordscapes_game(letters, accept_list):
 
         if answer in accept_list:
             print("Woohoo! Correct, Please create other words!")
-            print()
+   
             accept_list.remove(answer)
         else:         
             print("Wrong answer!",  answer , " is not valid or might have been created. Please try again!")
-            print()
 
         if accept_list == []:
             print("*** Congrats! You created all words succesfully.***")
-            print()
+           
             break
 
 def generate_random_letter_list():
