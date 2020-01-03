@@ -1,3 +1,10 @@
+const readline = require('readline');
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+  terminal: false
+});
+
 const letterChoice = [
     " D, R, I, P ", 
     " A, P , K, R",
@@ -15,66 +22,45 @@ const letterList = [["DRIP", "RID", "DIP", "RIP"],
 function greeting() {
   let playerName = "What is your name?"
   console.log("Welcome to Wordscapes!");
-  console.log("Please create different words form 4 given letters!");
+  console.log("Please create different words from 4 given letters!");
 }
 
-function wordScapesGame(letters, accept_list) {
+function readAndProcessUserGuess(letters, accept_list) {
 
-  while (true){
-    let answer = "Your answer:"
-    
+
+//rl.question(
+process.openStdin().addListener('data', (input)=> {
+      const trimmedInput = input.toString().trim().toUpperCase();
+
+      if (accept_list.includes(trimmedInput)) {
+        console.log("Correct!");
+      } else {
+        console.log("Wrong answer!");
+      };
+
+    });
+
     // Check if answer in the accept_list
-    if (accept_list.indexOf(answer) !== -1)  {
-      console.log("Correct!");
-    } else {
-      console.log("Wrong answer!");
-    } if (accept_list === []) {
-      console.log("Yay! You created all the words successfully")
-    };
 
-    break
-  }
+
+  //   } if (accept_list === []) {
+  //     console.log("Yay! You created all the words successfully")
+  //   };
+
+  //   break
+  // }
 }
 
 function genterateRandomLetterList() {
-  const rand = letterChoice[Math.floor(Math.random() * letterChoice.length)];
-  console.log("User letter:" + rand + "to create different words");
-
-  if (rand === letterChoice[0]) {
-    possible_words_list = letterChoice[0];
-  } else if (rand === letterChoice[1]) {
-    possible_words_list = letterChoice[1];
-  } else if (rand === letterChoice[2]) {
-    possible_words_list = letterChoice[2];
-  } else if (rand ===  letterChoice[3]) {
-    possible_words_list = letterChoice[3];
-  }
-
-  return [rand, possible_words_list];
-
-}
-
-function playAgain() {
-  let playAgain = "Do you want to play again? Type Yes or No"
-
-  if (playAgain === "yes") {
-    return true;
-  }
-  else {
-   console.log("Bye");
-  }
+  const rand = Math.floor(Math.random() * letterChoice.length);
+  return [letterChoice[rand], letterList[rand]];
 }
 
 function playGame() {
   greeting()
-  const playing = true;
-  while (playing) {
-    const play_wordscapes_game = genterateRandomLetterList();
-    const letters = play_wordscapes_game[0];
-    const accept_list = play_wordscapes_game[1];
-    wordScapesGame(letters, accept_list);
-    playing == playAgain()
-  }
+  const [letters, words] = genterateRandomLetterList();
+  console.log(`Use [${letters}] to create different words.`)
+  readAndProcessUserGuess(letters, words);
 }
 
 playGame()
