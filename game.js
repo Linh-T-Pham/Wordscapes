@@ -1,3 +1,4 @@
+
 const readline = require('readline');
 const rl = readline.createInterface({
   input: process.stdin,
@@ -19,6 +20,7 @@ const letterList = [["DRIP", "RID", "DIP", "RIP"],
               "ATE", "BEAT"]];
 
 
+
 function greeting() {
   let playerName = "What is your name?"
   console.log("Welcome to Wordscapes!");
@@ -33,28 +35,30 @@ process.openStdin().addListener('data', (input)=> {
       const trimmedInput = input.toString().trim().toUpperCase();
 
       if (accept_list.includes(trimmedInput)) {
+        const index = accept_list.indexOf(trimmedInput) 
+        accept_list.slice(index,1)
         console.log("Correct!");
       } else {
         console.log("Wrong answer!");
       };
 
-    });
+    // Check if accept_list is empty:
+  
+    if (accept_list === []) {
+      console.log("Yay! You created all the words successfully")
+    };
 
-    // Check if answer in the accept_list
-
-
-  //   } if (accept_list === []) {
-  //     console.log("Yay! You created all the words successfully")
-  //   };
-
-  //   break
-  // }
+   
+  });
 }
+
+
 
 function genterateRandomLetterList() {
   const rand = Math.floor(Math.random() * letterChoice.length);
   return [letterChoice[rand], letterList[rand]];
 }
+
 
 function playGame() {
   greeting()
